@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:photostock/config/themes/theme.dart';
+import 'package:photostock/core/constants/constants.dart';
+import 'package:photostock/features/domain/entities/photo_entity.dart';
+import 'package:photostock/features/domain/usecases/get_photos_remote_usecase.dart';
+import 'package:photostock/features/presentation/pages/photo_detail_screen.dart';
+import 'package:photostock/injection_container.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
+
+  await initializeDependencies();
+  final getPhotosUseCase = sl<GetPhotosRemoteUseCase>();
+  final result = await getPhotosUseCase(params: (clientId, 1));
+  final entity = result.data?[0];
+
+
+  runApp(MyApp(entity: entity!,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  final PhotoEntity entity;
+
+  const MyApp({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: theme()  ,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('test'),
-        ),
-      ),
+      home: PhotoDetailScreen(photoEntity: entity)
     );
   }
 }
