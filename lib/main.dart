@@ -13,6 +13,10 @@ Future<void> main() async {
   final result = await getPhotosUseCase(params: (clientId, 1));
   final entity = result.data?[0];
 
+  for (var i in result.data!){
+    print(i.blurHash);
+  }
+
 
   runApp(MyApp(entity: entity!,));
 }

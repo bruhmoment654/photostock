@@ -38,7 +38,7 @@ class PhotoModel extends PhotoEntity {
       updatedAt: map['updatedAt'],
       width: map['width'],
       height: map['height'],
-      blurHash: map['blurHash'],
+      blurHash: map['blur_hash'],
       description: map['description'],
       imageUri: (map['urls'] as Map<String, dynamic>)['regular']);
 }

@@ -46,7 +46,7 @@ class PhotoDetailScreen extends StatelessWidget {
                       ?? 'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
                 errorWidget: (_, __, ___){
-                  return Container();
+                  return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
               ),
             )),
