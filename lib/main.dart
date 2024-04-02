@@ -9,19 +9,12 @@ import 'package:photostock/injection_container.dart';
 
 Future<void> main() async {
   await initializeDependencies();
-  final getPhotosUseCase = sl<GetPhotosRemoteUseCase>();
-  final result = await getPhotosUseCase(params: (clientId, 1));
-  final entity = result.data?[0];
-
-  runApp(MyApp(
-    entity: entity!,
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final PhotoEntity entity;
 
-  const MyApp({super.key, required this.entity});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
