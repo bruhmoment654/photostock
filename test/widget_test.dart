@@ -22,6 +22,7 @@ void main() async {
 
     test('clientId not null', () async {
       final result = await getPhotosUseCase(params: (clientId, 1));
+
       expect(result is DataSuccess, true);
     });
 
