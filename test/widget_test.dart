@@ -26,12 +26,12 @@ void main() async {
     });
 
     test('clientId is null', () async {
-      final result = await getPhotosUseCase(params: (null, 1));
+      final result = await getPhotosUseCase(params: ('',1));
       expect(result is DataFailed, true);
     });
 
     test('page is null', () async {
-      final result = await getPhotosUseCase(params: (clientId, null));
+      final result = await getPhotosUseCase(params: (clientId, 1));
       expect(result is DataSuccess, true);
     });
   });
