@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:go_router/go_router.dart';
 import 'package:photostock/features/domain/entities/photo_entity.dart';
 
 class PhotoDetailScreen extends StatelessWidget {
@@ -22,11 +23,11 @@ class PhotoDetailScreen extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () => {context.pop()},
                       child: const Text(
                         '< Back',
                         overflow: TextOverflow.visible,
-                        style: TextStyle(fontSize: 17, color: Colors.white),
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       )),
                 )
               ],
@@ -42,10 +43,11 @@ class PhotoDetailScreen extends StatelessWidget {
                 imageUrl: photoEntity.imageUri ?? '',
                 fit: BoxFit.cover,
                 placeholder: (_, __) {
-                  return BlurHash(hash: photoEntity.blurHash
-                      ?? 'LCA^B_4:0K~XIToft8M_00-U=_IV');
+                  return BlurHash(
+                      hash: photoEntity.blurHash ??
+                          'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
-                errorWidget: (_, __, ___){
+                errorWidget: (_, __, ___) {
                   return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
               ),
@@ -61,14 +63,14 @@ class PhotoDetailScreen extends StatelessWidget {
                   photoEntity.username ?? 'unknown user',
                   style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 40,
+                      fontSize: 32,
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
                   '${photoEntity.likes} likes',
                   style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700),
                 ),
               ],
