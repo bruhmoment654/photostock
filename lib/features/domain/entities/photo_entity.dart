@@ -1,4 +1,6 @@
-class PhotoEntity {
+import 'package:equatable/equatable.dart';
+
+class PhotoEntity extends Equatable {
   final String? id;
   final String? slug;
   final String? username;
@@ -12,22 +14,36 @@ class PhotoEntity {
   final String? description;
   final String? imageUri;
 
-  const PhotoEntity({this.id,
-    this.slug,
-    this.username,
-    this.color,
-    this.likes,
-    this.createdAt,
-    this.updatedAt,
-    this.width,
-    this.height,
-    this.blurHash,
-    this.description,
-    this.imageUri});
-
+  const PhotoEntity(
+      {this.id,
+      this.slug,
+      this.username,
+      this.color,
+      this.likes,
+      this.createdAt,
+      this.updatedAt,
+      this.width,
+      this.height,
+      this.blurHash,
+      this.description,
+      this.imageUri});
 
   @override
   String toString() {
     return 'PhotoEntity{id: $id, slug: $slug, username: $username, color: $color, createdAt: $createdAt, updatedAt: $updatedAt, width: $width, height: $height, blurHash: $blurHash, description: $description, imageUri: $imageUri}';
   }
+
+  List<Object?> get props => [
+        id,
+        slug,
+        username,
+        color,
+        createdAt,
+        updatedAt,
+        width,
+        height,
+        blurHash,
+        description,
+        imageUri
+      ];
 }
