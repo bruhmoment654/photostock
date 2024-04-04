@@ -65,14 +65,14 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
                 const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 30),
             sliver: BlocBuilder<RemotePhotoBloc, RemotePhotoState>(
               builder: (_, state) {
-                if (state is RemotePhotoLoading) {
+                if (state is RemotePhotoLoading && photos.isEmpty) {
                   return const SliverPadding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 50, vertical: 200),
                       sliver: SliverToBoxAdapter(
                           child: Center(child: CircularProgressIndicator())));
                 }
-                if (state is RemotePhotoError) {
+                if (state is RemotePhotoError && photos.isEmpty) {
                   return SliverPadding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 200),
@@ -92,7 +92,16 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(color: Colors.red),
-                          )
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  page = 1;
+                                  BlocProvider.of<RemotePhotoBloc>(context)
+                                      .add(GetPhotos((clientId, page)));
+                                });
+                              },
+                              icon: const Icon(Icons.refresh))
                         ],
                       ))));
                 }
