@@ -1,36 +1,45 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
-import 'package:photostock/core/resources/data_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photostock/core/constants/constants.dart';
 
 import '../../domain/entities/photo_entity.dart';
-import '../../domain/usecases/get_photos_remote_usecase.dart';
+import '../../domain/repository/photo_repository.dart';
 
 part 'remote_photo_event.dart';
 
 part 'remote_photo_state.dart';
 
 class RemotePhotoBloc extends Bloc<RemotePhotoEvent, RemotePhotoState> {
-  final GetPhotosRemoteUseCase _getPhotosRemoteUseCase;
+  final PhotoRepository _photoRepository;
 
-  RemotePhotoBloc(this._getPhotosRemoteUseCase)
-      : super(const RemotePhotoLoading()) {
+  RemotePhotoSuccess? _lastSuccess;
+  int defaultPage = 1;
+
+  RemotePhotoBloc(this._photoRepository) : super(const RemotePhotoLoading()) {
     on<GetPhotos>(onGetPhotos);
   }
 
   void onGetPhotos(GetPhotos event, Emitter<RemotePhotoState> emit) async {
-    final dataState =
-        await _getPhotosRemoteUseCase(params: event.requestParams);
+    try {
+      List<PhotoEntity>? photos = [];
+      int? page = event.page;
+      String clientId = event.clientId;
 
-    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
-      emit(RemotePhotoSuccess(dataState.data!));
-    }
+      page ??= defaultPage;
 
-    if (dataState is DataFailed || dataState.data!.isEmpty) {
-      emit(RemotePhotoError(dataState.exception!));
+      final result =
+          await _photoRepository.getPhotos(clientId: clientId, page: page);
+      photos.addAll(_lastSuccess?.photos ?? []);
+      if (result.response.statusCode == 200) {
+        defaultPage += 1;
+        photos.addAll(result.data);
+        _lastSuccess = RemotePhotoSuccess(photos, clientId, page);
+        emit(_lastSuccess!);
+      }
+    } on DioException catch (e) {
+      emit(RemotePhotoError(e));
     }
   }
 }

@@ -1,10 +1,12 @@
 part of 'remote_photo_bloc.dart';
 
 sealed class RemotePhotoEvent {
-  final (String?, int?) requestParams;
-  const RemotePhotoEvent(this.requestParams);
+  const RemotePhotoEvent();
 }
 
 class GetPhotos extends RemotePhotoEvent {
-  const GetPhotos((String?, int?) requestParams) : super(requestParams);
+  final String clientId;
+  final int? page;
+
+  const GetPhotos({this.clientId = defaultClientId, this.page}) : super();
 }

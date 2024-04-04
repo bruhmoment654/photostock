@@ -1,8 +1,7 @@
 import 'package:photostock/features/domain/entities/photo_entity.dart';
-
-import '../../../core/resources/data_state.dart';
+import 'package:retrofit/dio.dart';
 
 abstract class PhotoRepository{
 
-Future<DataState<List<PhotoEntity>>> getPhotos({String? clientId, int? page});
+Future<HttpResponse<List<PhotoEntity>>> getPhotos({String clientId, int page});
 }

@@ -24,10 +24,10 @@ class PhotoDetailScreen extends StatelessWidget {
                 SizedBox(
                   child: TextButton(
                       onPressed: () => {context.pop()},
-                      child: const Text(
+                      child: Text(
                         '< Back',
                         overflow: TextOverflow.visible,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: Theme.of(context).textTheme.titleLarge,
                       )),
                 )
               ],
@@ -43,11 +43,10 @@ class PhotoDetailScreen extends StatelessWidget {
                 imageUrl: photoEntity.imageUri ?? '',
                 fit: BoxFit.cover,
                 placeholder: (_, __) {
-                  return BlurHash(
-                      hash: photoEntity.blurHash ??
-                          'LCA^B_4:0K~XIToft8M_00-U=_IV');
+                  return BlurHash(hash: photoEntity.blurHash
+                      ?? 'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
-                errorWidget: (_, __, ___) {
+                errorWidget: (_, __, ___){
                   return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
                 },
               ),
@@ -63,14 +62,14 @@ class PhotoDetailScreen extends StatelessWidget {
                   photoEntity.username ?? 'unknown user',
                   style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 32,
+                      fontSize: 40,
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
                   '${photoEntity.likes} likes',
                   style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w700),
                 ),
               ],

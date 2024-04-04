@@ -13,7 +13,6 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-
     final shrinkProportion = getShrinkPercent(shrinkOffset);
     var textPos = shrinkProportion * MediaQuery.of(context).size.width / 2 - 55;
     if (textPos < 0) {
@@ -24,11 +23,8 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
       children: [
         ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(
-                sigmaX: 10, sigmaY: shrinkProportion*15),
-            child: Container(
-              // color: Colors.white.withAlpha(100),
-            ),
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: shrinkProportion * 15),
+            child: Container(),
           ),
         ),
         Positioned(
