@@ -4,27 +4,38 @@
 // utility in the flutter_test package. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
+import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:dio/dio.dart';
+import 'package:photostock/core/constants/constants.dart';
+import 'package:photostock/features/data/data_sources/remote/photo_api_service.dart';
+import 'package:photostock/features/data/repository/photo_repository.dart';
+import 'package:photostock/features/domain/repository/photo_repository.dart';
+import 'package:test/test.dart';
 
-import 'package:photostock/main.dart';
+void main() async {
+  group('api tests:', () {
+    final dio = Dio();
+    final photosApiService = PhotoApiService(dio);
+    PhotoRepository photoRepository = PhotoRepositoryImpl(photosApiService);
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    test('clientId not null', () async {
+      final result =
+          await photoRepository.getPhotos(clientId: clientId, page: 1);
+      expect(result.response.statusCode == HttpStatus.ok, true);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('clientId is null', () async {
+      try {
+        photoRepository.getPhotos();
+      } catch (e) {
+        expect(e is DioException, true);
+      }
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('page is null', () async {
+      final result = await photoRepository.getPhotos(clientId: clientId);
+      expect(result.response.statusCode == HttpStatus.ok, true);
+    });
   });
 }
