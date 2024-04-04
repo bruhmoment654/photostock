@@ -8,8 +8,8 @@ part of 'photo_api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _PhotosApiService implements PhotoApiService {
-  _PhotosApiService(
+class _PhotoApiService implements PhotoApiService {
+  _PhotoApiService(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,7 +21,7 @@ class _PhotosApiService implements PhotoApiService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<PhotoModel>>> getPhotos({
+  Future<HttpResponse<List<PhotoEntity>>> getPhotos({
     String? clientId,
     String? page,
   }) async {
@@ -34,7 +34,7 @@ class _PhotosApiService implements PhotoApiService {
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<PhotoModel>>>(Options(
+        _setStreamType<HttpResponse<List<PhotoEntity>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -51,7 +51,7 @@ class _PhotosApiService implements PhotoApiService {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => PhotoModel.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => PhotoEntity.fromJson(i as Map<String, dynamic>))
         .toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
