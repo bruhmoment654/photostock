@@ -21,7 +21,7 @@ void main() async {
 
     test('clientId not null', () async {
       final result =
-          await photoRepository.getPhotos(clientId: clientId, page: 1);
+          await photoRepository.getPhotos(clientId: defaultClientId, page: 1);
       expect(result.response.statusCode == HttpStatus.ok, true);
     });
 
@@ -34,7 +34,7 @@ void main() async {
     });
 
     test('page is null', () async {
-      final result = await photoRepository.getPhotos(clientId: clientId);
+      final result = await photoRepository.getPhotos(clientId: defaultClientId);
       expect(result.response.statusCode == HttpStatus.ok, true);
     });
   });
