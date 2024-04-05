@@ -5,8 +5,5 @@ sealed class RemotePhotoEvent {
 }
 
 class GetPhotos extends RemotePhotoEvent {
-  final String clientId;
-  final int? page;
-
-  const GetPhotos({this.clientId = defaultClientId, this.page}) : super();
+  const GetPhotos() : super();
 }

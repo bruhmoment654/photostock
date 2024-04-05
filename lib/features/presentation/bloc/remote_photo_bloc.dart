@@ -14,32 +14,27 @@ part 'remote_photo_state.dart';
 class RemotePhotoBloc extends Bloc<RemotePhotoEvent, RemotePhotoState> {
   final PhotoRepository _photoRepository;
 
-  RemotePhotoSuccess? _lastSuccess;
-  int defaultPage = 1;
+  final List<PhotoEntity> _loadedPhotos = [];
+  int _defaultPage = 1;
 
-  RemotePhotoBloc(this._photoRepository) : super(const RemotePhotoLoading()) {
+  RemotePhotoBloc(this._photoRepository) : super(const RemotePhotoLoading([])) {
     on<GetPhotos>(onGetPhotos);
   }
 
   void onGetPhotos(GetPhotos event, Emitter<RemotePhotoState> emit) async {
+    emit(RemotePhotoLoading(_loadedPhotos));
     try {
-      List<PhotoEntity>? photos = [];
-      int? page = event.page;
-      String clientId = event.clientId;
+      final result = await _photoRepository.getPhotos(
+          clientId: defaultClientId, page: _defaultPage);
 
-      page ??= defaultPage;
-
-      final result =
-          await _photoRepository.getPhotos(clientId: clientId, page: page);
-      photos.addAll(_lastSuccess?.photos ?? []);
       if (result.response.statusCode == 200) {
-        defaultPage += 1;
-        photos.addAll(result.data);
-        _lastSuccess = RemotePhotoSuccess(photos, clientId, page);
-        emit(_lastSuccess!);
+        _defaultPage += 1;
+        _loadedPhotos.addAll(result.data);
+        emit(RemotePhotoSuccess(_loadedPhotos, _defaultPage));
       }
+
     } on DioException catch (e) {
-      emit(RemotePhotoError(e));
+      emit(RemotePhotoError(_loadedPhotos, e));
     }
   }
 }

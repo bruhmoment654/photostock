@@ -33,6 +33,7 @@ class PhotoEntity extends Equatable {
     return 'PhotoEntity{id: $id, slug: $slug, createdAt: $createdAt, updatedAt: $updatedAt, width: $width, height: $height, blurHash: $blurHash, description: $description, rawImageUri: $imageUri}';
   }
 
+  @override
   List<Object?> get props => [
         id,
         slug,

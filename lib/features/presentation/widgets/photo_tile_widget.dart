@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:photostock/core/constants/constants.dart';
 import 'package:photostock/features/domain/entities/photo_entity.dart';
 
 class PhotoTile extends StatelessWidget {
@@ -33,7 +34,7 @@ class PhotoTile extends StatelessWidget {
                   hash: photoEntity.blurHash);
             },
             errorWidget: (_, __, ___) {
-              return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
+              return const BlurHash(hash: defaultHash);
             },
           ),
         ),
