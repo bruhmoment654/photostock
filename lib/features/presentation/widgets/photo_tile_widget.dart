@@ -31,7 +31,7 @@ class PhotoTile extends StatelessWidget {
             imageUrl: photoEntity.imageUri,
             fit: BoxFit.cover,
             placeholder: (_, __) {
-              return BlurHash(hash: photoEntity.blurHash);
+             return const SizedBox();
             },
             errorWidget: (_, __, ___) {
               return const BlurHash(hash: defaultHash);

@@ -68,11 +68,8 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
                   ))),
                 );
               }
-              if (state is RemotePhotoLoading) {
-                print(state.photos);
-              }
 
-              //onSuccess state isn't need handling
+              //onSuccess state doesn't need handling
               if (state.photos.isNotEmpty) {
                 return MultiSliver(children: <Widget>[
                   SliverPadding(
@@ -107,7 +104,7 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
                             ),
                           ),
                         )
-                      : Container()
+                      : const SizedBox()
                 ]);
               }
 
