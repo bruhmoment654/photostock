@@ -12,6 +12,7 @@ class PhotoDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -28,7 +29,7 @@ class PhotoDetailScreen extends StatelessWidget {
                       child: Text(
                         '< Back',
                         overflow: TextOverflow.visible,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: textTheme.titleLarge,
                       )),
                 )
               ],
@@ -41,12 +42,12 @@ class PhotoDetailScreen extends StatelessWidget {
                 bottomRight: Radius.circular(40),
               ),
               child: CachedNetworkImage(
-                imageUrl: photoEntity.imageUri ?? '',
+                imageUrl: photoEntity.imageUri,
                 fit: BoxFit.cover,
                 placeholder: (_, __) {
-                  return BlurHash(hash: photoEntity.blurHash ?? '');
+                  return BlurHash(hash: photoEntity.blurHash);
                 },
-                errorWidget: (_, __, ___){
+                errorWidget: (_, __, ___) {
                   return const BlurHash(hash: defaultHash);
                 },
               ),
@@ -58,20 +59,12 @@ class PhotoDetailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  photoEntity.username ?? 'unknown user',
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700),
-                ),
-                Text(
-                  '${photoEntity.likes} likes',
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700),
-                ),
+                Text(photoEntity.username,
+                    style: textTheme.headlineLarge?.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.w700)),
+                Text('${photoEntity.likes} likes',
+                    style: textTheme.labelLarge?.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.w700)),
               ],
             ),
           )),
