@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:go_router/go_router.dart';
+import 'package:photostock/core/constants/constants.dart';
 import 'package:photostock/features/domain/entities/photo_entity.dart';
 
 class PhotoDetailScreen extends StatelessWidget {
@@ -24,10 +25,10 @@ class PhotoDetailScreen extends StatelessWidget {
                 SizedBox(
                   child: TextButton(
                       onPressed: () => {context.pop()},
-                      child: const Text(
+                      child: Text(
                         '< Back',
                         overflow: TextOverflow.visible,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: Theme.of(context).textTheme.titleLarge,
                       )),
                 )
               ],
@@ -43,12 +44,10 @@ class PhotoDetailScreen extends StatelessWidget {
                 imageUrl: photoEntity.imageUri ?? '',
                 fit: BoxFit.cover,
                 placeholder: (_, __) {
-                  return BlurHash(
-                      hash: photoEntity.blurHash ??
-                          'LCA^B_4:0K~XIToft8M_00-U=_IV');
+                  return BlurHash(hash: photoEntity.blurHash ?? '');
                 },
-                errorWidget: (_, __, ___) {
-                  return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
+                errorWidget: (_, __, ___){
+                  return const BlurHash(hash: defaultHash);
                 },
               ),
             )),

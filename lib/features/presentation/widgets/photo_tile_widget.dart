@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:photostock/core/constants/constants.dart';
 import 'package:photostock/features/domain/entities/photo_entity.dart';
+
 
 class PhotoTile extends StatelessWidget {
   final PhotoEntity photoEntity;
@@ -10,7 +12,7 @@ class PhotoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String colorString = photoEntity.color ?? '#808080';
+    String colorString = photoEntity.color;
     Color color =
         Color(int.parse(colorString.substring(1, 7), radix: 16) + 0xFF000000);
     return Container(
@@ -26,22 +28,22 @@ class PhotoTile extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(25),
           child: CachedNetworkImage(
-            imageUrl: photoEntity.imageUri ?? '',
+            imageUrl: photoEntity.imageUri,
             fit: BoxFit.cover,
             placeholder: (_, __) {
               return BlurHash(
-                  hash: photoEntity.blurHash ?? 'LCA^B_4:0K~XIToft8M_00-U=_IV');
+                  hash: photoEntity.blurHash);
             },
             errorWidget: (_, __, ___) {
-              return const BlurHash(hash: 'LCA^B_4:0K~XIToft8M_00-U=_IV');
+              return const BlurHash(hash: defaultHash);
             },
           ),
         ),
         Positioned(
-          top: 127,
           left: 15,
+            bottom:35,
             child: Text(
-          photoEntity.username ?? 'unknown',
+          photoEntity.username,
           style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w700,
@@ -49,7 +51,7 @@ class PhotoTile extends StatelessWidget {
           ),
         )),
         Positioned(
-            top: 152,
+            bottom: 20,
             left: 15,
             child: Text(
                 '${photoEntity.likes} likes',

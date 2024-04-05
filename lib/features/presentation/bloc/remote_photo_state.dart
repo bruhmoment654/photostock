@@ -2,23 +2,34 @@ part of 'remote_photo_bloc.dart';
 
 @immutable
 sealed class RemotePhotoState extends Equatable {
-  final List<PhotoEntity>? photos;
-  final DioException? exception;
+  final List<PhotoEntity> photos;
 
-  const RemotePhotoState({this.photos, this.exception});
-
-  @override
-  List<Object?> get props => [photos, exception];
+  const RemotePhotoState({required this.photos});
 }
 
 class RemotePhotoLoading extends RemotePhotoState {
-  const RemotePhotoLoading();
+  const RemotePhotoLoading(List<PhotoEntity> photos) : super(photos: photos);
+
+  @override
+  List<Object?> get props => [photos];
 }
 
 class RemotePhotoSuccess extends RemotePhotoState {
-  const RemotePhotoSuccess(List<PhotoEntity> photos) : super(photos: photos);
+  final int page;
+
+  const RemotePhotoSuccess(List<PhotoEntity> photos, this.page)
+      : super(photos: photos);
+
+  @override
+  List<Object?> get props => [photos, page];
 }
 
 class RemotePhotoError extends RemotePhotoState {
-  const RemotePhotoError(DioException exception) : super(exception: exception);
+  final DioException exception;
+
+  const RemotePhotoError(List<PhotoEntity> photos, this.exception)
+      : super(photos: photos);
+
+  @override
+  List<Object?> get props => [photos, exception];
 }

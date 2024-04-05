@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photostock/core/constants/constants.dart';
@@ -17,19 +17,13 @@ class PhotosListScreen extends StatefulWidget {
 }
 
 class _PhotosListScreenState extends State<PhotosListScreen> {
-  late int page;
-  List<PhotoEntity> photos = [];
+
   late final ScrollController _controller;
-  late bool _isLoading;
 
   void _handleScrollChange() {
     if (_controller.position.extentAfter <= 25) {
-      setState(() {
-        page += 1;
-        _isLoading = true;
         BlocProvider.of<RemotePhotoBloc>(context)
-            .add(GetPhotos((clientId, page)));
-      });
+            .add(GetPhotos());
     }
   }
 
@@ -43,10 +37,8 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
 
   @override
   void initState() {
-    _isLoading = false;
     _controller = ScrollController(
         onAttach: _handlePositionAttach, onDetach: _handlePositionDetach);
-    page = 1;
     super.initState();
   }
 
@@ -61,80 +53,49 @@ class _PhotosListScreenState extends State<PhotosListScreen> {
               pinned: true,
               delegate: PhotosListPageDelegate(minExtent: 90, maxExtent: 130)),
           SliverPadding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 30),
-            sliver: BlocBuilder<RemotePhotoBloc, RemotePhotoState>(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+            sliver: BlocConsumer<RemotePhotoBloc, RemotePhotoState>(
+              listener: (context, state) {
+                if (state is RemotePhotoError) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Error while loading data')));
+                }
+              },
               builder: (_, state) {
-                if (state is RemotePhotoLoading && photos.isEmpty) {
-                  return const SliverPadding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 200),
-                      sliver: SliverToBoxAdapter(
-                          child: Center(child: CircularProgressIndicator())));
+                if (state is RemotePhotoLoading && state.photos.isEmpty) {
+                  return const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator()));
                 }
-                if (state is RemotePhotoError && photos.isEmpty) {
-                  return SliverPadding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 50, vertical: 200),
-                      sliver: SliverToBoxAdapter(
-                          child: Center(
-                              child: Column(
-                        children: [
-                          const Icon(
-                            Icons.error,
-                            size: 100,
-                            color: Colors.red,
-                          ),
-                          Text(
-                            'Error while getting data, check your internet connection.',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(color: Colors.red),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  page = 1;
-                                  BlocProvider.of<RemotePhotoBloc>(context)
-                                      .add(GetPhotos((clientId, page)));
-                                });
-                              },
-                              icon: const Icon(Icons.refresh))
-                        ],
-                      ))));
+
+                //onError state handled in listener
+                //onSuccess state isn't need handling
+
+                if (state.photos.isNotEmpty) {
+                  return SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 20,
+                            crossAxisSpacing: 20),
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: state.photos.length, (context, index) {
+                      return GestureDetector(
+                        onTap: () => {
+                          context.pushNamed('photo', extra: state.photos[index])
+                        },
+                        child: PhotoTile(
+                          photoEntity: state.photos[index],
+                        ),
+                      );
+                    }),
+                  );
                 }
-                if (state is RemotePhotoSuccess) {
-                  photos.addAll(state.photos!);
-                }
-                return SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20),
-                  delegate: SliverChildBuilderDelegate(
-                      childCount: photos.length, (context, index) {
-                    return GestureDetector(
-                      onTap: () =>
-                          {context.pushNamed('photo', extra: photos[index])},
-                      child: PhotoTile(
-                        photoEntity: photos[index],
-                      ),
-                    );
-                  }),
+                return SliverToBoxAdapter(
+                  child: Container(),
                 );
               },
             ),
           ),
-          _isLoading
-              ? const SliverPadding(
-                  padding: EdgeInsets.only(bottom: 50),
-                  sliver: SliverToBoxAdapter(
-                    child: CupertinoActivityIndicator(),
-                  ),
-                )
-              : const SliverToBoxAdapter()
         ],
       ),
     );
