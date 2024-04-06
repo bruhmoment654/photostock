@@ -11,6 +11,7 @@ class PhotoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     String colorString = photoEntity.color;
     Color color =
         Color(int.parse(colorString.substring(1, 7), radix: 16) + 0xFF000000);
@@ -30,8 +31,9 @@ class PhotoTile extends StatelessWidget {
             imageUrl: photoEntity.imageUri,
             fit: BoxFit.cover,
             placeholder: (_, __) {
-              return BlurHash(
-                  hash: photoEntity.blurHash);
+              return Opacity(
+                opacity: .1,
+                  child: BlurHash(hash: photoEntity.blurHash));
             },
             errorWidget: (_, __, ___) {
               return const BlurHash(hash: defaultHash);
@@ -39,26 +41,16 @@ class PhotoTile extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 15,
-            bottom:35,
-            child: Text(
-          photoEntity.username,
-          style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            fontSize: 12
-          ),
-        )),
+            left: 15,
+            bottom: 35,
+            child: Text(photoEntity.username,
+                style: textTheme.labelMedium
+                    ?.copyWith(fontWeight: FontWeight.w700))),
         Positioned(
             bottom: 20,
             left: 15,
-            child: Text(
-                '${photoEntity.likes} likes',
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10
-              ),
-            )),
+            child: Text('${photoEntity.likes} likes',
+                style: textTheme.labelSmall)),
       ]),
     );
   }
