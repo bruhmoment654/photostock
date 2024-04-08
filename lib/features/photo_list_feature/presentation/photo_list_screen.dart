@@ -40,12 +40,12 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
                         radius: 30,
                       ))),
                     )
-                  : _buildPhotoList(photos, wm, showLoadingMarker: false);
+                  : _buildPhotoList(photos, wm, showLoadingMarker: true);
             },
             failureBuilder: (_, __, photos) {
               //if no data or loading state
               return photos!.isNotEmpty
-                  ? _buildPhotoList(photos, wm, showLoadingMarker: true)
+                  ? _buildPhotoList(photos, wm)
                   : SliverPadding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 50, vertical: 200),
