@@ -8,8 +8,8 @@ part of 'photo_api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _PhotoApiService implements PhotoApiService {
-  _PhotoApiService(
+class _PhotoApi implements PhotoApi {
+  _PhotoApi(
     this._dio, {
     this.baseUrl,
   }) {

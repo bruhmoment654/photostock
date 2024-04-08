@@ -7,17 +7,29 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:photostock/api/app_dio_configurator.dart';
+import 'package:photostock/api/service/photo_api_service.dart';
+import 'package:photostock/config/app_config.dart';
+import 'package:photostock/config/environment/build_type.dart';
+import 'package:photostock/config/environment/environment.dart';
 import 'package:photostock/core/constants/constants.dart';
-import 'package:photostock/features/data/data_sources/remote/photo_api_service.dart';
-import 'package:photostock/features/data/repository/photo_repository.dart';
-import 'package:photostock/features/domain/repository/photo_repository.dart';
+import 'package:photostock/features/photo_list_feature/data/repository/photo_repository.dart';
+import 'package:photostock/features/photo_list_feature/domain/repository/photo_repository.dart';
 import 'package:test/test.dart';
 
 void main() async {
   group('api tests:', () {
-    final dio = Dio();
-    final photosApiService = PhotoApiService(dio);
-    PhotoRepository photoRepository = PhotoRepositoryImpl(photosApiService);
+    final appConfig = AppConfig(
+        url: const Environment(buildType: BuildType.dev).buildType.defaultUrl);
+
+    final dio = const AppDioConfigurator().create(
+      interceptors: [],
+      url: appConfig.url.value,
+      proxyUrl: appConfig.proxyUrl,
+    );
+    final photosApiService = PhotoApi(dio);
+    IPhotoRepository photoRepository = PhotoRepositoryImpl(photosApiService);
+
 
     test('clientId not null', () async {
       final result =
@@ -27,15 +39,19 @@ void main() async {
 
     test('clientId is null', () async {
       try {
-        photoRepository.getPhotos();
+        await photoRepository.getPhotos();
       } catch (e) {
         expect(e is DioException, true);
       }
     });
-
     test('page is null', () async {
       final result = await photoRepository.getPhotos(clientId: defaultClientId);
       expect(result.response.statusCode == HttpStatus.ok, true);
+    });
+    test('custom dio', () async {
+
+
+
     });
   });
 }
