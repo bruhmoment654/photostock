@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-sealed class DataState<T> {
+sealed class DataState<T> { //TODO: to union_state
   final T? data;
   final DioException? exception;
 
