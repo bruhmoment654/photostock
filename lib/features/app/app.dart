@@ -44,6 +44,7 @@ class _AppState extends State<App> {
       /// Localization.
       locale: _localizations.firstOrNull,
       supportedLocales: _localizations,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

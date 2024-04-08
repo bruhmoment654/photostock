@@ -1,17 +1,14 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:photostock/features/navigation/domain/service/app_router.dart';
-import 'package:photostock/features/photo_detail_feature/presentation/photo_detail_screen.dart';
 import 'package:photostock/features/photo_list_feature/di/photo_list_scope.dart';
 import 'package:photostock/features/photo_list_feature/domain/entities/photo_entity.dart';
 import 'package:photostock/features/photo_list_feature/presentation/photo_list_model.dart';
 import 'package:photostock/features/photo_list_feature/presentation/photo_list_screen.dart';
-import 'package:photostock/features/photo_list_feature/presentation/remote_photo_state.dart';
 import 'package:provider/provider.dart';
+import 'package:union_state/union_state.dart';
+import 'package:photostock/uikit/snacks/data_load_error_snackbar.dart';
 
 PhotoListWM defaultPhotoWMFactory(BuildContext context) {
   final scope = context.read<IPhotoListScope>();
@@ -21,7 +18,7 @@ PhotoListWM defaultPhotoWMFactory(BuildContext context) {
 }
 
 abstract interface class IPhotoListWM implements IWidgetModel {
-  ValueListenable<RemotePhotoState> get state;
+  PhotoStateNotifier get state;
 
   ScrollController get controller;
 
@@ -30,8 +27,6 @@ abstract interface class IPhotoListWM implements IWidgetModel {
   void onTapCard(PhotoEntity entity);
 
   void getPhotos();
-
-  void onError();
 }
 
 final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
@@ -53,7 +48,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
-  ValueListenable<RemotePhotoState> get state => model.state;
+  PhotoStateNotifier get state => model.state;
 
   @override
   late ScrollController controller;
@@ -68,11 +63,10 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
-  getPhotos() async {
+  void getPhotos() async {
     await model.getPhotos();
-
-    if (state.value is RemotePhotoError){
-      onError();
+    if (state.value is UnionStateFailure) {
+      _onError();
     }
   }
 
@@ -82,11 +76,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
-  void onError()  {
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error while loading data')));
-  }
-
-  @override
   ThemeData get theme => Theme.of(context);
+
+  void _onError() {
+    ScaffoldMessenger.of(context).showSnackBar(dataLoadErrorSnackBar);
+  }
 }
