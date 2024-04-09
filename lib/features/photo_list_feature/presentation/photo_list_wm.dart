@@ -8,7 +8,6 @@ import 'package:photostock/features/photo_list_feature/presentation/photo_list_m
 import 'package:photostock/features/photo_list_feature/presentation/photo_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:union_state/union_state.dart';
-import 'package:photostock/uikit/snacks/data_load_error_snackbar.dart';
 
 PhotoListWM defaultPhotoWMFactory(BuildContext context) {
   final scope = context.read<IPhotoListScope>();
@@ -24,7 +23,7 @@ abstract interface class IPhotoListWM implements IWidgetModel {
 
   ThemeData get theme;
 
-  void onTapCard(PhotoEntity entity);
+  void onTileTap(PhotoEntity entity);
 
   void getPhotos();
 }
@@ -58,6 +57,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
     controller = ScrollController(
         onAttach: _handlePositionAttach, onDetach: _handlePositionDetach);
     model.getPhotos();
+    state.addListener(_errorListener);
 
     super.initWidgetModel();
   }
@@ -65,20 +65,21 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   @override
   void getPhotos() async {
     await model.getPhotos();
-    if (state.value is UnionStateFailure) {
-      _onError();
-    }
   }
 
   @override
-  void onTapCard(PhotoEntity photoEntity) {
+  void onTileTap(PhotoEntity photoEntity) {
     context.router.push(PhotoDetailRoute(photoEntity: photoEntity));
   }
 
   @override
   ThemeData get theme => Theme.of(context);
 
-  void _onError() {
-    ScaffoldMessenger.of(context).showSnackBar(dataLoadErrorSnackBar);
+  void _errorListener() {
+    if (state.value is UnionStateFailure) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error while loading data')),
+      );
+    }
   }
 }

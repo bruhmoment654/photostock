@@ -56,7 +56,8 @@ dependencies:
   path: ^1.8.3
   path_provider: 2.1.2
   provider: 6.1.1
-
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,10 @@ dev_dependencies:
   test: ^1.24.9
   json_serializable: 6.7.1
   auto_route_generator: 7.3.2
+  golden_toolkit: ^0.15.0
+  mocktail: 1.0.3
+  elementary_test: 2.0.0
+  surf_widget_test_composer: 0.0.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

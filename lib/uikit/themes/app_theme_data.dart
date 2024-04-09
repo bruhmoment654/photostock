@@ -6,11 +6,13 @@ import 'package:photostock/uikit/text/text_theme.dart';
 abstract class AppThemeData {
 
   static final lightTheme = ThemeData(
-      fontFamily: manropeFontFamily, textTheme: defaultTextTheme()
+      // fontFamily: manropeFontFamily,
+      textTheme: defaultTextTheme()
   );
 
   static final darkTheme = ThemeData(
-    fontFamily: manropeFontFamily, textTheme: defaultTextTheme()
+    // fontFamily: manropeFontFamily,
+      textTheme: defaultTextTheme()
   );
 
 }
