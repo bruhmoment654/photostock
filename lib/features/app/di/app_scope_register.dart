@@ -2,10 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../api/app_dio_configurator.dart';
 import '../../../config/app_config.dart';
 import '../../../config/environment/environment.dart';
-import '../../../config/url.dart';
 import 'app_scope.dart';
 
 /// {@template app_scope_register.class}
