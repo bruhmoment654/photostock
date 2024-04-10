@@ -1,17 +1,5 @@
 part of 'text_theme.dart';
 
-enum AppTextStyle{
-
-  headlineLarge(text32),
-  titleLarge(text20),
-  labelLarge(text16),
-  labelMedium(text12),
-  labelSmall(text10);
-
-  final TextStyle value;
-  const AppTextStyle(this.value);
-}
-
 const text10 = TextStyle(
     color: Colors.white,
     fontSize: 10

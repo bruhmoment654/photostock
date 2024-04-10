@@ -525,6 +525,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  mockito:
+    dependency: transitive
+    description:
+      name: mockito
+      sha256: "6841eed20a7befac0ce07df8116c8b8233ed1f4486a7647c7fc5a02ae6163917"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.4"
   mocktail:
     dependency: "direct dev"
     description:
@@ -541,6 +549,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  network_image_mock:
+    dependency: "direct dev"
+    description:
+      name: network_image_mock
+      sha256: "855cdd01d42440e0cffee0d6c2370909fc31b3bcba308a59829f24f64be42db7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  nock:
+    dependency: "direct main"
+    description:
+      name: nock
+      sha256: e5bb7dae9c94405477988cf3bd8a94ef141abd74577125d6a51d47909ff107f9
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.3"
   node_preamble:
     dependency: transitive
     description:
@@ -606,7 +630,7 @@ packages:
     source: hosted
     version: "2.2.1"
   path_provider_platform_interface:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: path_provider_platform_interface
       sha256: "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334"
@@ -910,10 +934,10 @@ packages:
     dependency: "direct dev"
     description:
       name: surf_widget_test_composer
-      sha256: f1886e143564363490bfa44bf7c4e8e88441bcf7ad1cfbb5102a74e94a6c91cf
+      sha256: "1262078bca669a3d8284d8923b784759cacf8a5c3901fa728cc7a5193c52e97c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.4"
   synchronized:
     dependency: transitive
     description:

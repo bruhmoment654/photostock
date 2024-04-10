@@ -7,7 +7,6 @@ import '../../../core/constants/constants.dart';
 import '../../photo_list_feature/domain/entities/photo_entity.dart';
 
 class PhotoDetailScreen extends StatelessWidget {
-
   final PhotoEntity photoEntity;
 
   const PhotoDetailScreen({super.key, required this.photoEntity});
@@ -28,7 +27,7 @@ class PhotoDetailScreen extends StatelessWidget {
               children: <Widget>[
                 SizedBox(
                   child: TextButton(
-                      onPressed: context.router.back,
+                      onPressed: () => {context.router.back()},
                       child: Text(
                         '< Back',
                         overflow: TextOverflow.visible,
@@ -40,37 +39,37 @@ class PhotoDetailScreen extends StatelessWidget {
             expandedHeight: 370,
             flexibleSpace: FlexibleSpaceBar(
                 background: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: photoEntity.imageUri,
-                    fit: BoxFit.cover,
-                    placeholder: (_, __) {
-                      return BlurHash(hash: photoEntity.blurHash);
-                    },
-                    errorWidget: (_, __, ___) {
-                      return const BlurHash(hash: defaultHash);
-                    },
-                  ),
-                )),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: photoEntity.imageUri,
+                fit: BoxFit.cover,
+                placeholder: (_, __) {
+                  return BlurHash(hash: photoEntity.blurHash);
+                },
+                errorWidget: (_, __, ___) {
+                  return const BlurHash(hash: defaultHash);
+                },
+              ),
+            )),
           ),
           SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 26),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(photoEntity.username,
-                        style: textTheme.headlineLarge?.copyWith(
-                            color: Colors.black, fontWeight: FontWeight.w700)),
-                    Text('${photoEntity.likes} likes',
-                        style: textTheme.labelLarge?.copyWith(
-                            color: Colors.black, fontWeight: FontWeight.w700)),
-                  ],
-                ),
-              )),
+            padding: const EdgeInsets.symmetric(horizontal: 26),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(photoEntity.username,
+                    style: textTheme.headlineLarge?.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.w700)),
+                Text('${photoEntity.likes} likes',
+                    style: textTheme.labelLarge?.copyWith(
+                        color: Colors.black, fontWeight: FontWeight.w700)),
+              ],
+            ),
+          )),
         ],
       ),
     );

@@ -17,7 +17,7 @@ PhotoListWM defaultPhotoWMFactory(BuildContext context) {
 }
 
 abstract interface class IPhotoListWM implements IWidgetModel {
-  PhotoStateNotifier get state;
+  PhotoStateListener get state;
 
   ScrollController get controller;
 
@@ -47,7 +47,7 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
-  PhotoStateNotifier get state => model.state;
+  PhotoStateListener get state => model.state;
 
   @override
   late ScrollController controller;
@@ -76,9 +76,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   ThemeData get theme => Theme.of(context);
 
   void _errorListener() {
-    if (state.value is UnionStateFailure) {
+    if (state.value is UnionStateFailure && state.value.data!.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error while loading data')),
+        const SnackBar(content: Text('Connection error. Check your internet connection and try again')),
       );
     }
   }
