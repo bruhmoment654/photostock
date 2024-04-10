@@ -1,11 +1,14 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:photostock/features/photo_list_feature/presentation/photo_list_wm.dart';
-import 'package:photostock/features/photo_list_feature/presentation/widgets/loadable_photo_list_sliver.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_wm.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/widgets/loadable_photo_list_sliver.dart';
+
 import 'package:union_state/union_state.dart';
 
-import 'util/photos_list_page_delegate.dart';
+import '../../util/photos_list_page_delegate.dart';
+
+
 
 class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   const PhotoListScreen(

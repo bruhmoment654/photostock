@@ -3,8 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
-import '../../../core/constants/constants.dart';
-import '../../photo_list_feature/domain/entities/photo_entity.dart';
+import '../../../../../core/constants/constants.dart';
+import '../../../domain/entities/photo_entity.dart';
 
 class PhotoDetailScreen extends StatelessWidget {
   final PhotoEntity photoEntity;
@@ -38,22 +38,25 @@ class PhotoDetailScreen extends StatelessWidget {
             ),
             expandedHeight: 370,
             flexibleSpace: FlexibleSpaceBar(
-                background: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: photoEntity.imageUri,
-                fit: BoxFit.cover,
-                placeholder: (_, __) {
-                  return BlurHash(hash: photoEntity.blurHash);
-                },
-                errorWidget: (_, __, ___) {
-                  return const BlurHash(hash: defaultHash);
-                },
-              ),
-            )),
+                background: Hero(
+                  tag: photoEntity.id,
+                  child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                                ),
+                                child: CachedNetworkImage(
+                  imageUrl: photoEntity.imageUri,
+                  fit: BoxFit.cover,
+                  placeholder: (_, __) {
+                    return BlurHash(hash: photoEntity.blurHash);
+                  },
+                  errorWidget: (_, __, ___) {
+                    return const BlurHash(hash: defaultHash);
+                  },
+                                ),
+                              ),
+                )),
           ),
           SliverToBoxAdapter(
               child: Padding(

@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:photostock/features/navigation/domain/service/app_router.dart';
-import 'package:photostock/features/photo_list_feature/di/photo_list_scope.dart';
-import 'package:photostock/features/photo_list_feature/domain/entities/photo_entity.dart';
-import 'package:photostock/features/photo_list_feature/presentation/photo_list_model.dart';
-import 'package:photostock/features/photo_list_feature/presentation/photo_list_screen.dart';
+import 'package:photostock/features/photos/di/photo_list_scope.dart';
+import 'package:photostock/features/photos/domain/entities/photo_entity.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_model.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:union_state/union_state.dart';
 

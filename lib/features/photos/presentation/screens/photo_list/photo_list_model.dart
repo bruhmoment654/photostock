@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:photostock/core/constants/constants.dart';
-import 'package:photostock/features/photo_list_feature/domain/repository/photo_repository.dart';
+import 'package:photostock/features/photos/domain/repository/photo_repository.dart';
 import 'package:union_state/union_state.dart';
 
-import '../domain/entities/photo_entity.dart';
+import '../../../domain/entities/photo_entity.dart';
+
+
 
 typedef PhotoStateNotifier = UnionStateNotifier<List<PhotoEntity>>;
 typedef PhotoStateListener = ValueListenable<UnionState<List<PhotoEntity>>>;

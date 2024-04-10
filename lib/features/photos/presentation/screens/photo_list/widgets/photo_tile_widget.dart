@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:photostock/core/constants/constants.dart';
 
-import '../../domain/entities/photo_entity.dart';
+import '../../../../domain/entities/photo_entity.dart';
 
 class PhotoTile extends StatelessWidget {
   final PhotoEntity photoEntity;

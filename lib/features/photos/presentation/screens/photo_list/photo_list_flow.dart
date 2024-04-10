@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:photostock/common/widgets/di_scope.dart';
-import 'package:photostock/features/photo_list_feature/di/photo_list_scope.dart';
-import 'package:photostock/features/photo_list_feature/presentation/photo_list_screen.dart';
+import 'package:photostock/features/photos/di/photo_list_scope.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_screen.dart';
+
 
 @RoutePage()
 class PhotoListFlow extends StatelessWidget implements AutoRouteWrapper {

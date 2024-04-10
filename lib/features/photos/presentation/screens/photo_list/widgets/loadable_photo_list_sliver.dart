@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:photostock/features/photo_list_feature/presentation/widgets/photo_tile_widget.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_list/widgets/photo_tile_widget.dart';
+
 import 'package:sliver_tools/sliver_tools.dart';
 
-import '../../domain/entities/photo_entity.dart';
+import '../../../../domain/entities/photo_entity.dart';
 
 class LoadablePhotoListSliver extends StatelessWidget {
   final List<PhotoEntity> photos;
@@ -30,10 +31,13 @@ class LoadablePhotoListSliver extends StatelessWidget {
             ),
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return GestureDetector(
-                  onTap: () => onTap(photos[index]),
-                  child: PhotoTile(
-                    photoEntity: photos[index],
+                return Hero(
+                  tag: photos[index].id,
+                  child: GestureDetector(
+                    onTap: () => onTap(photos[index]),
+                    child: PhotoTile(
+                      photoEntity: photos[index],
+                    ),
                   ),
                 );
               },

@@ -4,8 +4,8 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:photostock/core/constants/constants.dart';
-import 'package:photostock/features/photo_detail_feature/presentation/photo_detail_screen.dart';
-import 'package:photostock/features/photo_list_feature/domain/entities/photo_entity.dart';
+import 'package:photostock/features/photos/domain/entities/photo_entity.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_screen.dart';
 
 import '../../../../util/fake_path_provider.dart';
 
