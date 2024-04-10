@@ -5,7 +5,6 @@ import 'package:photostock/core/constants/constants.dart';
 
 import '../../domain/entities/photo_entity.dart';
 
-
 class PhotoTile extends StatelessWidget {
   final PhotoEntity photoEntity;
 
@@ -34,8 +33,7 @@ class PhotoTile extends StatelessWidget {
             fit: BoxFit.cover,
             placeholder: (_, __) {
               return Opacity(
-                opacity: .1,
-                  child: BlurHash(hash: photoEntity.blurHash));
+                  opacity: .1, child: BlurHash(hash: photoEntity.blurHash));
             },
             errorWidget: (_, __, ___) {
               return const BlurHash(hash: defaultHash);

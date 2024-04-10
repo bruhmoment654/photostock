@@ -139,7 +139,8 @@ void main() {
     testGoldens('Successful data load, golden', (tester) async {
       await mockNetworkImagesFor(() async {
         await tester.pumpWidgetBuilder(photoListScreen.build(wm));
-        await expectLater(find.byType(Scaffold), matchesGoldenFile('goldens/photo_list_golden.png'));
+        await expectLater(find.byType(Scaffold),
+            matchesGoldenFile('goldens/photo_list_golden.png'));
       });
     });
   });

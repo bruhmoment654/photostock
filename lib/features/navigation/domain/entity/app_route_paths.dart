@@ -6,7 +6,6 @@
 /// static const String screenPath = 'screenPath';
 /// ```
 abstract class AppRoutePaths {
-
   /// photo list screen path
   static const photosHomePath = '/';
 

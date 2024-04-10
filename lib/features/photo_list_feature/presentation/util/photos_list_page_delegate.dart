@@ -23,8 +23,7 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
       children: [
         ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(
-                sigmaX: 15, sigmaY: shrinkProportion*20),
+            filter: ImageFilter.blur(sigmaX: 15, sigmaY: shrinkProportion * 20),
             child: Container(
               color: Colors.white.withOpacity(0.75),
             ),

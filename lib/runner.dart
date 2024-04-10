@@ -14,4 +14,3 @@ Future<void> _runApp(Environment env) async {
 
   runApp(AppFlow(appScope: scope));
 }
-

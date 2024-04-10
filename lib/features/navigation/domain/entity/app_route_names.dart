@@ -6,7 +6,6 @@
 /// static const String screenName = 'screenNameRoute';
 /// ```
 abstract class AppRouteNames {
-
   /// photo list screen name
   static const photosHome = 'photosRouter';
 

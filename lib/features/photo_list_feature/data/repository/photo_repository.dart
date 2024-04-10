@@ -11,7 +11,7 @@ class PhotoRepositoryImpl extends IPhotoRepository {
   @override
   Future<HttpResponse<List<PhotoEntity>>> getPhotos(
       {String clientId = '', int page = 1}) async {
-       return _photoApiService.getPhotos(
-          clientId: clientId, page: page.toString());
+    return _photoApiService.getPhotos(
+        clientId: clientId, page: page.toString());
   }
 }
