@@ -15,7 +15,7 @@ typedef PhotoStateListener = ValueListenable<UnionState<List<PhotoEntity>>>;
 final class PhotoListModel extends ElementaryModel {
   final IPhotoRepository _repository;
 
-  final _state = UnionStateNotifier(<PhotoEntity>[]);
+  final _state = PhotoStateNotifier([]);
 
   PhotoStateListener get state => _state;
   final List<PhotoEntity> _loadedPhotos = [];
