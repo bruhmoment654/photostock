@@ -9,6 +9,8 @@
 .history
 .svn/
 migrate_working_dir/
+#.test/features/debug/screens/photo_detail_screen/failures
+#.test/features/debug/screens/photo_list_screen/failures
 
 # IntelliJ related
 *.iml
