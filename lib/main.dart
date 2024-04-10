@@ -1,28 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photostock/config/routes/routes.dart';
-import 'package:photostock/config/themes/theme.dart';
-import 'package:photostock/features/presentation/bloc/remote_photo_bloc.dart';
-import 'package:photostock/injection_container.dart';
+import 'dart:io';
 
-Future<void> main() async {
-  await initializeDependencies();
-  runApp(const MyApp());
-}
+import 'package:flutter/cupertino.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:photostock/config/environment/environment.dart';
+import 'package:photostock/runner.dart';
 
-class MyApp extends StatelessWidget {
+import 'config/environment/build_type.dart';
 
-  const MyApp({super.key});
+void main() async{
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<RemotePhotoBloc>(
-      create: (context) => sl<RemotePhotoBloc>(),
-      child: MaterialApp.router(
-        theme: theme(),
-        debugShowCheckedModeBanner: false,
-        routerConfig: router,
-      ),
-    );
-  }
+  run(const Environment(buildType: BuildType.dev)).ignore();
 }
