@@ -9,10 +9,12 @@ abstract base class Converter<TResult, TFrom> {
   TResult convert(TFrom input);
 
   /// Convert nullable TFrom to nullable TResult.
-  TResult? convertNullable(TFrom? input) => input == null ? null : convert(input);
+  TResult? convertNullable(TFrom? input) =>
+      input == null ? null : convert(input);
 
   /// Convert TFrom list to TResult list.
-  Iterable<TResult> convertMultiple(Iterable<TFrom> inputList) => inputList.map(convert);
+  Iterable<TResult> convertMultiple(Iterable<TFrom> inputList) =>
+      inputList.map(convert);
 }
 
 /// {@template converter_to_and_from.class}

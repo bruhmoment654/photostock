@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config/app_config.dart';
 import '../../../config/environment/environment.dart';
 
-
 /// {@template app_scope.class}
 /// Scope of dependencies which are needed through the whole app's life.
 /// {@endtemplate}
@@ -17,7 +16,6 @@ final class AppScope implements IAppScope {
   final SharedPreferences sharedPreferences;
   @override
   final Dio dio;
-
 
   /// {@macro app_scope.class}
   const AppScope({
@@ -41,5 +39,4 @@ abstract interface class IAppScope {
 
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
-
 }

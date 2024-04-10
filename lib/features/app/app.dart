@@ -30,7 +30,6 @@ class _AppState extends State<App> {
     super.dispose();
   }
 
-
   //TODO: add ThemeMod builder
   @override
   Widget build(BuildContext context) {
@@ -41,6 +40,7 @@ class _AppState extends State<App> {
       theme: AppThemeData.lightTheme,
       darkTheme: AppThemeData.darkTheme,
       themeMode: ThemeMode.light,
+
       /// Localization.
       locale: _localizations.firstOrNull,
       supportedLocales: _localizations,

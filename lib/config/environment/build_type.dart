@@ -1,4 +1,1 @@
-enum BuildType {
-  dev,
-  prod
-}
+enum BuildType { dev, prod }

@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:photostock/common/widgets/di_scope.dart';
 import 'package:photostock/features/app/di/app_scope.dart';
 import 'package:photostock/features/theme_mode/presentation/theme_mode_controller.dart';
 import 'package:photostock/uikit/themes/app_theme_data.dart';
 import 'package:provider/provider.dart';
-import 'package:surf_widget_test_composer/surf_widget_test_composer.dart' as helper;
+import 'package:surf_widget_test_composer/surf_widget_test_composer.dart'
+    as helper;
 
 typedef OnTestMain = FutureOr<void> Function();
 
@@ -21,7 +21,6 @@ class MockAppScope extends Mock implements IAppScope {}
 class MockThemeModeController extends Mock implements ThemeModeController {}
 
 Future<void> testExecutable(OnTestMain testMain) async {
-
   final mockAppScope = MockAppScope();
 
   final themeController = MockThemeModeController();
@@ -62,12 +61,14 @@ Future<void> testExecutable(OnTestMain testMain) async {
   return helper.testExecutable(
     testMain: testMain,
     themes: themes,
-    wrapper: (child, mode, theme, localizations, locales) => helper.BaseWidgetTestWrapper(
+    wrapper: (child, mode, theme, localizations, locales) =>
+        helper.BaseWidgetTestWrapper(
       childBuilder: child,
       mode: mode,
       themeData: theme,
       dependencies: (widget) {
-        when(() => themeController.themeMode).thenReturn(ValueNotifier(mode.toThemeMode));
+        when(() => themeController.themeMode)
+            .thenReturn(ValueNotifier(mode.toThemeMode));
 
         return DiScope<IAppScope>(
           onFactory: (_) => mockAppScope,

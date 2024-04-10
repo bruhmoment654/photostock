@@ -78,7 +78,9 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   void _errorListener() {
     if (state.value is UnionStateFailure && state.value.data!.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Connection error. Check your internet connection and try again')),
+        const SnackBar(
+            content: Text(
+                'Connection error. Check your internet connection and try again')),
       );
     }
   }
