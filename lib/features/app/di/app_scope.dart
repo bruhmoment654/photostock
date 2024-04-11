@@ -21,13 +21,12 @@ final class AppScope implements IAppScope {
   final IPhotoStorage photoStorage;
 
   /// {@macro app_scope.class}
-  const AppScope({
-    required this.env,
-    required this.appConfig,
-    required this.sharedPreferences,
-    required this.dio,
-    required this.photoStorage
-  });
+  const AppScope(
+      {required this.env,
+      required this.appConfig,
+      required this.sharedPreferences,
+      required this.dio,
+      required this.photoStorage});
 }
 
 /// {@macro app_scope.class}

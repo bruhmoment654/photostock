@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/widgets/photo_tile_widget.dart';
-
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../../domain/entities/photo_entity.dart';

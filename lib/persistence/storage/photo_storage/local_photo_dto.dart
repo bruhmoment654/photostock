@@ -1,4 +1,1 @@
-class LocalDto {
-
-
-}
+class LocalDto {}

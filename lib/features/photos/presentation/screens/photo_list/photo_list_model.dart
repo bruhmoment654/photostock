@@ -7,8 +7,6 @@ import 'package:union_state/union_state.dart';
 
 import '../../../domain/entities/photo_entity.dart';
 
-
-
 typedef PhotoStateNotifier = UnionStateNotifier<List<PhotoEntity>>;
 typedef PhotoStateListener = ValueListenable<UnionState<List<PhotoEntity>>>;
 
@@ -41,7 +39,8 @@ final class PhotoListModel extends ElementaryModel {
       if (result.response.statusCode == 200) {
         _defaultPage += 1;
         //for test cases, where data length may be <= 8
-        final toAdd = result.data.length <= 8 ? result.data : result.data.getRange(0, 8);
+        final toAdd =
+            result.data.length <= 8 ? result.data : result.data.getRange(0, 8);
         _loadedPhotos.addAll(toAdd);
         _state.content(_loadedPhotos);
       }

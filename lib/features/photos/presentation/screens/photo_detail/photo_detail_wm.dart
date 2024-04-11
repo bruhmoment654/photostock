@@ -46,7 +46,7 @@ final class PhotoDetailWM
 
     super.initWidgetModel();
 
-    if (model.hasEntity()){
+    if (model.hasEntity()) {
       _controller.forward();
     }
   }
@@ -75,6 +75,7 @@ final class PhotoDetailWM
       controller.forward();
     }
   }
+
   @override
   PhotoEntity get photoEntity => model.photoEntity;
 }

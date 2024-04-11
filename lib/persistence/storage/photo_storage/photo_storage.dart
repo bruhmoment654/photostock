@@ -14,7 +14,7 @@ final class PhotoStorage implements IPhotoStorage {
 
   @override
   Future<void> savePhotos(List<PhotoEntity> entities) {
-   return _prefs.setStringList(PhotoStorageKeys.photos.keyString,
+    return _prefs.setStringList(PhotoStorageKeys.photos.keyString,
         entities.map((e) => e.toString()).toList());
   }
 }
