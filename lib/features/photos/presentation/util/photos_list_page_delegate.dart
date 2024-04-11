@@ -3,12 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
-  PhotosListPageDelegate({required this.maxExtent, required this.minExtent});
+  PhotosListPageDelegate(
+      {required this.maxExtent, required this.minExtent, this.leading});
 
   @override
   final double minExtent;
   @override
   final double maxExtent;
+  final Widget? leading;
 
   @override
   Widget build(
@@ -40,6 +42,7 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
             textAlign: TextAlign.left,
           ),
         ),
+        Positioned(right: 15, bottom: 0, child: leading ?? const SizedBox())
       ],
     );
   }

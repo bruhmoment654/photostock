@@ -29,7 +29,7 @@ class PhotoEntity extends Equatable {
 
   @override
   String toString() {
-    return '{"id": "$id", "slug": "$slug", "createdAt": "$createdAt", "updatedAt": "$updatedAt", "width": "$width", "height": "$height", "blurHash": "$blurHash", "description": "$description", "imageUri": "$imageUri"}';
+    return '{"id": "$id", "slug": "$slug", "username": "$username", "color": "$color", "likes": "$likes", "blur_hash": "$blurHash", "description": "$description", "imageUri": "$imageUri"}';
   }
 
   @override

@@ -17,24 +17,41 @@ PhotoListWM defaultPhotoWMFactory(BuildContext context) {
 }
 
 abstract interface class IPhotoListWM implements IWidgetModel {
+  double get width;
+
   PhotoStateListener get state;
 
   ScrollController get controller;
 
   ThemeData get theme;
 
+  AnimationController get animationController;
+
+  Animation<double> get loadingAnimation;
+
+  Animation<double> get errorAnimation;
+
   void onTileTap(PhotoEntity entity);
 
-  void getPhotos();
+  void refresh();
+
+  void onFavIconTap();
 }
 
 final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
+    with SingleTickerProviderWidgetModelMixin
     implements IPhotoListWM {
   PhotoListWM(super._model);
 
+  late AnimationController _animationController;
+  @override
+  late Animation<double> loadingAnimation;
+  @override
+  late Animation<double> errorAnimation;
+
   void _handleScrollChange() {
     if (controller.position.extentAfter <= 10) {
-      getPhotos();
+      refresh();
     }
   }
 
@@ -50,10 +67,24 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   PhotoStateListener get state => model.state;
 
   @override
+  AnimationController get animationController => _animationController;
+
+  @override
   late ScrollController controller;
 
   @override
+  double get width => MediaQuery.of(context).size.width;
+
+  @override
   void initWidgetModel() {
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    loadingAnimation =
+        Tween(begin: 1.0, end: 0.0).animate(_animationController);
+    errorAnimation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
     controller = ScrollController(
         onAttach: _handlePositionAttach, onDetach: _handlePositionDetach);
     model.getPhotos();
@@ -63,7 +94,8 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
-  void getPhotos() async {
+  void refresh() async {
+    animationController.value = 0;
     await model.getPhotos();
   }
 
@@ -73,15 +105,25 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   }
 
   @override
+  void onFavIconTap() {
+    context.router.push(const PhotoFavRoute());
+  }
+
+  @override
   ThemeData get theme => Theme.of(context);
 
   void _errorListener() {
-    if (state.value is UnionStateFailure && state.value.data!.isNotEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text(
-                'Connection error. Check your internet connection and try again')),
-      );
+    if (state.value is UnionStateFailure) {
+      if (state.value.data!.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+                  'Connection error. Check your internet connection and try again')),
+        );
+      }
+    }
+    if (state.value.data!.isEmpty) {
+      _animationController.forward();
     }
   }
 }

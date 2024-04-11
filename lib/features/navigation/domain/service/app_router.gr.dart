@@ -26,6 +26,12 @@ abstract class _$AppRouter extends RootStackRouter {
         )),
       );
     },
+    PhotoFavRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const PhotoFavFlow()),
+      );
+    },
     PhotoListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -71,6 +77,20 @@ class PhotoDetailRouteArgs {
   String toString() {
     return 'PhotoDetailRouteArgs{key: $key, photoEntity: $photoEntity}';
   }
+}
+
+/// generated route for
+/// [PhotoFavFlow]
+class PhotoFavRoute extends PageRouteInfo<void> {
+  const PhotoFavRoute({List<PageRouteInfo>? children})
+      : super(
+          PhotoFavRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PhotoFavRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
