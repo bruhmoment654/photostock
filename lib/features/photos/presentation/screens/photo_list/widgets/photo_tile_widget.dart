@@ -42,12 +42,6 @@ class PhotoTile extends StatelessWidget {
         ),
         Positioned(
             left: 15,
-            bottom: 50,
-            child: Text(photoEntity.id,
-                style: textTheme.labelMedium
-                    ?.copyWith(fontWeight: FontWeight.w700))),
-        Positioned(
-            left: 15,
             bottom: 35,
             child: Text(photoEntity.username,
                 style: textTheme.labelMedium
