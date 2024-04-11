@@ -8,8 +8,6 @@ import 'package:union_state/union_state.dart';
 
 import '../../util/photos_list_page_delegate.dart';
 
-
-
 class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
   const PhotoListScreen(
       {WidgetModelFactory wmFactory = defaultPhotoWMFactory, super.key})

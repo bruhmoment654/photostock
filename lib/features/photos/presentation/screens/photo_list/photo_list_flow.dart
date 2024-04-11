@@ -16,8 +16,8 @@ class PhotoListFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return DiScope<IPhotoListScope>(
-      onFactory: PhotoListScope.create,
+    return DiScope<IPhotoScope>(
+      onFactory: PhotoScope.create,
       onDispose: (scope) => scope.dispose(),
       child: this,
     );

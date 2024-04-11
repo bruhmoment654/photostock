@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_model.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_screen.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_wm.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../common/widgets/di_scope.dart';
 import '../../../di/photo_list_scope.dart';
@@ -14,13 +17,16 @@ class PhotoDetailFlow extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    return PhotoDetailScreen(photoEntity: photoEntity);
+    return PhotoDetailScreen(
+        wmFactory: (_) => PhotoDetailWM(PhotoDetailModel(
+            photoEntity: photoEntity,
+            repository: context.read<IPhotoScope>().localRepository)));
   }
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return DiScope<IPhotoListScope>(
-      onFactory: PhotoListScope.create,
+    return DiScope<IPhotoScope>(
+      onFactory: PhotoScope.create,
       onDispose: (scope) => scope.dispose(),
       child: this,
     );

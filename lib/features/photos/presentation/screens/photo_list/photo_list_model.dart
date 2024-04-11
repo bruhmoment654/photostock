@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:photostock/core/constants/constants.dart';
-import 'package:photostock/features/photos/domain/repository/photo_repository.dart';
+import 'package:photostock/features/photos/domain/repository/i_photo_repository.dart';
 import 'package:union_state/union_state.dart';
 
 import '../../../domain/entities/photo_entity.dart';
@@ -13,7 +13,7 @@ typedef PhotoStateNotifier = UnionStateNotifier<List<PhotoEntity>>;
 typedef PhotoStateListener = ValueListenable<UnionState<List<PhotoEntity>>>;
 
 final class PhotoListModel extends ElementaryModel {
-  final IPhotoRepository _repository;
+  final IRemotePhotoRepository _repository;
 
   final _state = PhotoStateNotifier([]);
 
@@ -22,7 +22,7 @@ final class PhotoListModel extends ElementaryModel {
   int _defaultPage = 1;
 
   PhotoListModel({
-    required IPhotoRepository repository,
+    required IRemotePhotoRepository repository,
   }) : _repository = repository;
 
   @override

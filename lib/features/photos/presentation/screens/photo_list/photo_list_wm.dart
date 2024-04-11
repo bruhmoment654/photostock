@@ -10,9 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:union_state/union_state.dart';
 
 PhotoListWM defaultPhotoWMFactory(BuildContext context) {
-  final scope = context.read<IPhotoListScope>();
+  final scope = context.read<IPhotoScope>();
   return PhotoListWM(PhotoListModel(
-    repository: scope.repository,
+    repository: scope.remoteRepository,
   ));
 }
 

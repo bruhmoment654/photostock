@@ -2,12 +2,12 @@ import 'package:retrofit/dio.dart';
 
 import '../../../../api/service/photo_api_service.dart';
 import '../../domain/entities/photo_entity.dart';
-import '../../domain/repository/photo_repository.dart';
+import '../../domain/repository/i_photo_repository.dart';
 
-class PhotoRepositoryImpl extends IPhotoRepository {
+class RemotePhotoRepositoryImpl extends IRemotePhotoRepository {
   final PhotoApi _photoApiService;
 
-  PhotoRepositoryImpl(this._photoApiService);
+  RemotePhotoRepositoryImpl(this._photoApiService);
 
   @override
   Future<HttpResponse<List<PhotoEntity>>> getPhotos(

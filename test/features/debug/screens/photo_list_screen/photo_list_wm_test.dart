@@ -8,7 +8,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:photostock/core/constants/constants.dart';
 import 'package:photostock/features/photos/domain/entities/photo_entity.dart';
-import 'package:photostock/features/photos/domain/repository/photo_repository.dart';
+import 'package:photostock/features/photos/domain/repository/i_photo_repository.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_model.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_screen.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_wm.dart';
@@ -20,7 +20,7 @@ import '../../../../util/fake_path_provider.dart';
 
 const second = Duration(seconds: 1);
 
-class PhotoRepositoryMock extends Mock implements IPhotoRepository {}
+class PhotoRepositoryMock extends Mock implements IRemotePhotoRepository {}
 
 class BuildContextMock extends Mock implements BuildContext {}
 

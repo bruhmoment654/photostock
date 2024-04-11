@@ -4,8 +4,13 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:photostock/core/constants/constants.dart';
+import 'package:photostock/features/photos/data/repository/local_photo_repository.dart';
 import 'package:photostock/features/photos/domain/entities/photo_entity.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_model.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_screen.dart';
+import 'package:photostock/features/photos/presentation/screens/photo_detail/photo_detail_wm.dart';
+import 'package:photostock/persistence/storage/photo_storage/photo_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../util/fake_path_provider.dart';
 
@@ -24,11 +29,13 @@ void main() async {
 
   testGoldens('photo detail screen golden test', (tester) async {
     mockNetworkImagesFor(() async {
+      final prefs = await SharedPreferences.getInstance();
       await tester.pumpWidget(MaterialApp(
-        home: PhotoDetailScreen(
-            key: ValueKey(photoEntity.id), photoEntity: photoEntity),
-      ));
-      await expectLater(find.byKey(ValueKey(photoEntity.id)),
+          home: PhotoDetailScreen(
+              wmFactory: (_) => PhotoDetailWM(PhotoDetailModel(
+                  photoEntity: photoEntity,
+                  repository: LocalPhotoRepository(PhotoStorage(prefs)))))));
+      await expectLater(find.byType(Scaffold),
           matchesGoldenFile('goldens/photo_detail_golden.png'));
     });
   });
