@@ -73,10 +73,12 @@ class PhotoDetailScreen extends ElementaryWidget<IPhotoDetailWM> {
               children: [
                 Text(wm.photoEntity.username,
                     style: textTheme.headlineLarge?.copyWith(
-                        color: colorScheme.onSurface, fontWeight: FontWeight.w700)),
+                        color: colorScheme.onSurface,
+                        fontWeight: FontWeight.w700)),
                 Text('${wm.photoEntity.likes} likes',
                     style: textTheme.labelLarge?.copyWith(
-                        color: colorScheme.onSurface, fontWeight: FontWeight.w700)),
+                        color: colorScheme.onSurface,
+                        fontWeight: FontWeight.w700)),
               ],
             ),
           )),

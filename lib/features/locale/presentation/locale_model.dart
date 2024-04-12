@@ -6,7 +6,6 @@ import 'package:photostock/features/locale/domain/repository/i_locale_repository
 const _defaultLocale = Locale("en", "EN");
 
 final class LocaleModel extends ElementaryModel {
-
   final ILocaleRepository _repository;
 
   final _locale = ValueNotifier<Locale>(_defaultLocale);

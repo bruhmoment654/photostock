@@ -20,12 +20,14 @@ ThemeModeWM defaultThemeWMFactory(BuildContext context) {
 }
 
 /// Interface for [ThemeModeWM].
-abstract interface class IThemeModeWM implements ThemeModeController, IWidgetModel {}
+abstract interface class IThemeModeWM
+    implements ThemeModeController, IWidgetModel {}
 
 /// {@template theme_wm.class}
 /// [WidgetModel] for [ThemeModeWidget].
 /// {@endtemplate}
-final class ThemeModeWM extends WidgetModel<ThemeModeWidget, ThemeModeModel> implements IThemeModeWM {
+final class ThemeModeWM extends WidgetModel<ThemeModeWidget, ThemeModeModel>
+    implements IThemeModeWM {
   @override
   ValueListenable<ThemeMode> get themeMode => model.themeMode;
 

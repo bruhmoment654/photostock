@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../theme_mode_provider.dart';
 
 /// Signature for widget builder with ThemeMode.
-typedef ThemeModeWidgetBuilder = Widget Function(BuildContext context, ThemeMode themeMode);
+typedef ThemeModeWidgetBuilder = Widget Function(
+    BuildContext context, ThemeMode themeMode);
 
 /// {@template theme_mode_builder.class}
 /// A widget that calls [builder] when the theme mode changes.
@@ -37,8 +38,8 @@ class _ThemeModeBuilderState extends State<ThemeModeBuilder> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: _themeModeListenable,
-      builder: (builderContext, themeMode, _) => widget.builder(builderContext, themeMode),
+      builder: (builderContext, themeMode, _) =>
+          widget.builder(builderContext, themeMode),
     );
   }
 }
-

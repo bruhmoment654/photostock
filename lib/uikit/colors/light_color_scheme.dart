@@ -33,4 +33,3 @@ const lightColorScheme = ColorScheme(
   outlineVariant: Color(0xFFC1C9BF),
   scrim: Color(0xFF000000),
 );
-

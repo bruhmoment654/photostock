@@ -62,19 +62,21 @@ final class SettingsWM extends WidgetModel<SettingsScreen, SettingsModel>
   @override
   void showDetails() {
     final l10n = context.l10n;
-    showDialog(context: context, builder: (context) =>  Dialog(
-      child:  Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(l10n.detailDialogText),
-            const Text('t.me/Chees8069'),
-            const Text('discord: urbaevartem')
-          ],
-        ),
-      ),
-    ));
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(l10n.detailDialogText),
+                    const Text('t.me/Chees8069'),
+                    const Text('discord: urbaevartem')
+                  ],
+                ),
+              ),
+            ));
   }
 }

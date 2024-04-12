@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:photostock/l10n/app_localizations_x.dart';
 
 class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
-  PhotosListPageDelegate(
-      {required this.maxExtent, required this.minExtent});
+  PhotosListPageDelegate({required this.maxExtent, required this.minExtent});
 
   @override
   final double minExtent;

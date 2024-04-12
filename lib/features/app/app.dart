@@ -36,27 +36,24 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return ThemeModeBuilder(
-        builder: (_, themeMode) {
-          return LocaleBuilder(
-            builder: (_, locale) =>
-                MaterialApp.router(
-                  /// Navigation.
-                  routeInformationParser: _appRouter.defaultRouteParser(),
-                  routerDelegate: _appRouter.delegate(),
-                  theme: AppThemeData.lightTheme,
-                  darkTheme: AppThemeData.darkTheme,
-                  themeMode: themeMode,
+    return ThemeModeBuilder(builder: (_, themeMode) {
+      return LocaleBuilder(
+        builder: (_, locale) => MaterialApp.router(
+          /// Navigation.
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routerDelegate: _appRouter.delegate(),
+          theme: AppThemeData.lightTheme,
+          darkTheme: AppThemeData.darkTheme,
+          themeMode: themeMode,
 
-                  /// Localization.
-                  locale: locale,
-                  supportedLocales: _localizations,
-                  localizationsDelegates: _localizationsDelegates,
-                  debugShowCheckedModeBanner: false,
-                ),
-          );
-        }
-    );
+          /// Localization.
+          locale: locale,
+          supportedLocales: _localizations,
+          localizationsDelegates: _localizationsDelegates,
+          debugShowCheckedModeBanner: false,
+        ),
+      );
+    });
   }
 }
 
