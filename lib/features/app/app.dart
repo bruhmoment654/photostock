@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photostock/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:photostock/uikit/themes/app_theme_data.dart';
 import 'package:provider/provider.dart';
 
@@ -33,18 +34,22 @@ class _AppState extends State<App> {
   //TODO: add ThemeMod builder
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      /// Navigation.
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routerDelegate: _appRouter.delegate(),
-      theme: AppThemeData.lightTheme,
-      darkTheme: AppThemeData.darkTheme,
-      themeMode: ThemeMode.light,
+    return ThemeModeBuilder(
+      builder: (_, themeMode)  {
+        return MaterialApp.router(
+        /// Navigation.
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routerDelegate: _appRouter.delegate(),
+        theme: AppThemeData.lightTheme,
+        darkTheme: AppThemeData.darkTheme,
+        themeMode: themeMode,
 
-      /// Localization.
-      locale: _localizations.firstOrNull,
-      supportedLocales: _localizations,
-      debugShowCheckedModeBanner: false,
+        /// Localization.
+        locale: _localizations.firstOrNull,
+        supportedLocales: _localizations,
+        debugShowCheckedModeBanner: false,
+      );
+      }
     );
   }
 }

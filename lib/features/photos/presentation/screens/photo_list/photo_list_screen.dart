@@ -18,7 +18,12 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
     final width = wm.width;
 
     return Scaffold(
+      backgroundColor: wm.theme.colorScheme.surface,
       extendBodyBehindAppBar: true,
+      floatingActionButton: FloatingActionButton(
+        onPressed: wm.kappa ,
+        backgroundColor: wm.theme.colorScheme.primary,
+      ),
       body: CustomScrollView(
         controller: wm.controller,
         slivers: [

@@ -15,6 +15,7 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final colorScheme = Theme.of(context).colorScheme;
     final shrinkProportion = getShrinkPercent(shrinkOffset);
     var textPos = shrinkProportion * MediaQuery.of(context).size.width / 2 - 55;
     if (textPos < 0) {
@@ -27,7 +28,7 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 15, sigmaY: shrinkProportion * 20),
             child: Container(
-              color: Colors.white.withOpacity(0.75),
+              color: colorScheme.surface.withOpacity(.75),
             ),
           ),
         ),
@@ -35,10 +36,12 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
           left: 15 + textPos,
           right: 0,
           bottom: 5,
-          child: const Text(
+          child: Text(
             'Photos',
             style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 25),
+                color: colorScheme.onSurface,
+                fontWeight: FontWeight.w700,
+                fontSize: 25),
             textAlign: TextAlign.left,
           ),
         ),

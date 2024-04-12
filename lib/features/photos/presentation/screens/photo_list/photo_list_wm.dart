@@ -6,6 +6,8 @@ import 'package:photostock/features/photos/di/photo_list_scope.dart';
 import 'package:photostock/features/photos/domain/entities/photo_entity.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_model.dart';
 import 'package:photostock/features/photos/presentation/screens/photo_list/photo_list_screen.dart';
+import 'package:photostock/features/theme_mode/presentation/theme_mode_provider.dart';
+import 'package:photostock/features/theme_mode/presentation/theme_mode_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:union_state/union_state.dart';
 
@@ -36,6 +38,8 @@ abstract interface class IPhotoListWM implements IWidgetModel {
   void refresh();
 
   void onFavIconTap();
+
+  void kappa();
 }
 
 final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
@@ -107,6 +111,10 @@ final class PhotoListWM extends WidgetModel<PhotoListScreen, PhotoListModel>
   @override
   void onFavIconTap() {
     context.router.push(const PhotoFavRoute());
+  }
+
+  void kappa() async{
+    await ThemeModeProvider.of(context).switchThemeMode();
   }
 
   @override

@@ -14,6 +14,7 @@ class PhotoDetailScreen extends ElementaryWidget<IPhotoDetailWM> {
   @override
   Widget build(IPhotoDetailWM wm) {
     final textTheme = wm.theme.textTheme;
+    final colorScheme = wm.theme.colorScheme;
 
     return Scaffold(
       body: CustomScrollView(
@@ -66,16 +67,16 @@ class PhotoDetailScreen extends ElementaryWidget<IPhotoDetailWM> {
           ),
           SliverToBoxAdapter(
               child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26),
+            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(wm.photoEntity.username,
                     style: textTheme.headlineLarge?.copyWith(
-                        color: Colors.black, fontWeight: FontWeight.w700)),
+                        color: colorScheme.onSurface, fontWeight: FontWeight.w700)),
                 Text('${wm.photoEntity.likes} likes',
                     style: textTheme.labelLarge?.copyWith(
-                        color: Colors.black, fontWeight: FontWeight.w700)),
+                        color: colorScheme.onSurface, fontWeight: FontWeight.w700)),
               ],
             ),
           )),
