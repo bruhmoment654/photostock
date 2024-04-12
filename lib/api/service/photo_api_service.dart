@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:photostock/core/constants/constants.dart';
-import 'package:photostock/features/photo_list_feature/domain/entities/photo_entity.dart';
 import 'package:retrofit/retrofit.dart';
+
+import '../../features/photos/domain/entities/photo_entity.dart';
 
 part 'photo_api_service.g.dart';
 

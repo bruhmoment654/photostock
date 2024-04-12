@@ -11,4 +11,7 @@ abstract class AppRouteNames {
 
   /// photo detail screen name
   static const photoDetail = 'photoDetailRouter';
+
+  /// photo favourite screen name
+  static const photoFav = 'photoFavRouter';
 }

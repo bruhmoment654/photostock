@@ -11,4 +11,6 @@ abstract class AppRoutePaths {
 
   /// photo detail screen path
   static const photoDetailPath = '/photo';
+
+  static const photoFavPath = '/favourite';
 }

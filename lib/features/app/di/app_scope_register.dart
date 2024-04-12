@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:photostock/persistence/storage/photo_storage/photo_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/app_config.dart';
@@ -18,12 +19,13 @@ final class AppScopeRegister {
     final sharedPreferences = await SharedPreferences.getInstance();
     final appConfig = _createAppConfig(env, sharedPreferences);
     final dio = Dio();
+    final photoStorage = PhotoStorage(sharedPreferences);
     return AppScope(
-      env: env,
-      appConfig: appConfig,
-      sharedPreferences: sharedPreferences,
-      dio: dio,
-    );
+        env: env,
+        appConfig: appConfig,
+        sharedPreferences: sharedPreferences,
+        dio: dio,
+        photoStorage: photoStorage);
   }
 
   AppConfig _createAppConfig(Environment env, SharedPreferences prefs) {
