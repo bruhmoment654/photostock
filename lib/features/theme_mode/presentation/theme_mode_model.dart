@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import '../domain/repository/i_theme_mode_repository.dart';
 
 const _themeByDefault = ThemeMode.system;

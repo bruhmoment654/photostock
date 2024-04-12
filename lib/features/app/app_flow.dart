@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
+import 'package:photostock/features/locale/presentation/locale_provider.dart';
 import 'package:photostock/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,8 @@ class AppFlow extends StatelessWidget {
       children: [
         DiScope<IAppScope>(onFactory: (_) => appScope),
         ChangeNotifierProvider<AppRouter>(create: (_) => AppRouter()),
-        const ThemeModeProvider()
+        const ThemeModeProvider(),
+        const LocaleProvider()
       ],
       child: const App(),
     );

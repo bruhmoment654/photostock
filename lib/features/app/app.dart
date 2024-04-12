@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:photostock/features/locale/presentation/widgets/locale_builder.dart';
 import 'package:photostock/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
+import 'package:photostock/l10n/app_localizations.g.dart';
 import 'package:photostock/uikit/themes/app_theme_data.dart';
 import 'package:provider/provider.dart';
 
@@ -31,25 +34,28 @@ class _AppState extends State<App> {
     super.dispose();
   }
 
-  //TODO: add ThemeMod builder
   @override
   Widget build(BuildContext context) {
     return ThemeModeBuilder(
-      builder: (_, themeMode)  {
-        return MaterialApp.router(
-        /// Navigation.
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: _appRouter.delegate(),
-        theme: AppThemeData.lightTheme,
-        darkTheme: AppThemeData.darkTheme,
-        themeMode: themeMode,
+        builder: (_, themeMode) {
+          return LocaleBuilder(
+            builder: (_, locale) =>
+                MaterialApp.router(
+                  /// Navigation.
+                  routeInformationParser: _appRouter.defaultRouteParser(),
+                  routerDelegate: _appRouter.delegate(),
+                  theme: AppThemeData.lightTheme,
+                  darkTheme: AppThemeData.darkTheme,
+                  themeMode: themeMode,
 
-        /// Localization.
-        locale: _localizations.firstOrNull,
-        supportedLocales: _localizations,
-        debugShowCheckedModeBanner: false,
-      );
-      }
+                  /// Localization.
+                  locale: locale,
+                  supportedLocales: _localizations,
+                  localizationsDelegates: _localizationsDelegates,
+                  debugShowCheckedModeBanner: false,
+                ),
+          );
+        }
     );
   }
 }
@@ -57,4 +63,11 @@ class _AppState extends State<App> {
 const _localizations = [
   Locale('en', 'EN'),
   Locale('ru', 'RU'),
+];
+
+const _localizationsDelegates = [
+  AppLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
 ];

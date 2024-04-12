@@ -20,22 +20,15 @@ class PhotoListScreen extends ElementaryWidget<IPhotoListWM> {
     return Scaffold(
       backgroundColor: wm.theme.colorScheme.surface,
       extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton(
-        onPressed: wm.kappa ,
-        backgroundColor: wm.theme.colorScheme.primary,
-      ),
       body: CustomScrollView(
         controller: wm.controller,
         slivers: [
           SliverPersistentHeader(
             pinned: true,
             delegate: PhotosListPageDelegate(
-                minExtent: 90,
-                maxExtent: 130,
-                leading: IconButton(
-                  icon: const Icon(Icons.favorite),
-                  onPressed: wm.onFavIconTap,
-                )),
+              minExtent: 90,
+              maxExtent: 130,
+            ),
           ),
           AnimatedBuilder(
             animation: wm.animationController,

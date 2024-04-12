@@ -1,16 +1,16 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:photostock/l10n/app_localizations_x.dart';
 
 class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
   PhotosListPageDelegate(
-      {required this.maxExtent, required this.minExtent, this.leading});
+      {required this.maxExtent, required this.minExtent});
 
   @override
   final double minExtent;
   @override
   final double maxExtent;
-  final Widget? leading;
 
   @override
   Widget build(
@@ -37,7 +37,7 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
           right: 0,
           bottom: 5,
           child: Text(
-            'Photos',
+            context.l10n.photosAppSliverTemplate,
             style: TextStyle(
                 color: colorScheme.onSurface,
                 fontWeight: FontWeight.w700,
@@ -45,7 +45,6 @@ class PhotosListPageDelegate extends SliverPersistentHeaderDelegate {
             textAlign: TextAlign.left,
           ),
         ),
-        Positioned(right: 15, bottom: 0, child: leading ?? const SizedBox())
       ],
     );
   }

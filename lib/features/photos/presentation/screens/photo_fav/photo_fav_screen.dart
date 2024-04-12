@@ -21,11 +21,7 @@ class PhotoFavScreen extends ElementaryWidget<IPhotoFavWM> {
             pinned: true,
             delegate: PhotosListPageDelegate(
                 minExtent: 90,
-                maxExtent: 130,
-                leading: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: wm.onBackTap,
-                )),
+                maxExtent: 130,),
           ),
           ValueListenableBuilder(
               valueListenable: wm.state,
