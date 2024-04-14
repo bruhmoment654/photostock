@@ -14,4 +14,6 @@ abstract class AppRouteNames {
 
   /// photo favourite screen name
   static const photoFav = 'photoFavRouter';
+
+  static const settings = 'settingsRouter';
 }

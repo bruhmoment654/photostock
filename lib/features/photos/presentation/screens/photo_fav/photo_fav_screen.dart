@@ -20,12 +20,9 @@ class PhotoFavScreen extends ElementaryWidget<IPhotoFavWM> {
           SliverPersistentHeader(
             pinned: true,
             delegate: PhotosListPageDelegate(
-                minExtent: 90,
-                maxExtent: 130,
-                leading: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: wm.onBackTap,
-                )),
+              minExtent: 90,
+              maxExtent: 130,
+            ),
           ),
           ValueListenableBuilder(
               valueListenable: wm.state,

@@ -1,0 +1,11 @@
+{
+"photosAppSliverTemplate": "Photos",
+"bottomNavBarHomeButtonText": "Home",
+"bottomNavBarFavouriteButtonText": "Favourite",
+"bottomNavBarSettingsButtonText": "Settings",
+"swapThemeSetting": "Swap Theme",
+"changeLanguageSetting": "Change language",
+"clearCacheSetting": "Clear Cache",
+"showDetailsSetting": "Show Detail",
+"detailDialogText": "Some data about developer"
+}

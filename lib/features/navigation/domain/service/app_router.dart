@@ -6,6 +6,8 @@ import '../../../photos/domain/entities/photo_entity.dart';
 import '../../../photos/presentation/screens/photo_detail/photo_detail_flow.dart';
 import '../../../photos/presentation/screens/photo_fav/photo_fav_flow.dart';
 import '../../../photos/presentation/screens/photo_list/photo_list_flow.dart';
+import '../../../root_screen/presentation/root_screen.dart';
+import '../../../settings/presentation/settings_flow.dart';
 
 part 'app_router.gr.dart';
 
@@ -17,9 +19,13 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-            page: PhotoListRoute.page,
-            path: AppRoutePaths.photosHomePath,
-            initial: true),
+          page: RootScreenRoute.page,
+          path: AppRoutePaths.rootScreenPath,
+        ),
+        AutoRoute(
+          page: PhotoListRoute.page,
+          path: AppRoutePaths.photosHomePath,
+        ),
         AutoRoute(
           page: PhotoDetailRoute.page,
           path: AppRoutePaths.photoDetailPath,

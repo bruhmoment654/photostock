@@ -1,0 +1,11 @@
+{
+"photosAppSliverTemplate": "Фотографии",
+"bottomNavBarHomeButtonText": "Домой",
+"bottomNavBarFavouriteButtonText": "Избранное",
+"bottomNavBarSettingsButtonText": "Настройки",
+"swapThemeSetting": "Сменить тему",
+"changeLanguageSetting": "Сменить язык",
+"clearCacheSetting": "Очистить кэш",
+"showDetailsSetting": "Показать детали",
+"detailDialogText": "Лицензий у меня точно нет.."
+}

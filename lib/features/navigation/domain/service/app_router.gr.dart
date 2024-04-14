@@ -38,6 +38,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const PhotoListFlow()),
       );
     },
+    RootScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RootScreenFlow(),
+      );
+    },
+    SettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const SettingsFlow()),
+      );
+    },
   };
 }
 
@@ -103,6 +115,34 @@ class PhotoListRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PhotoListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RootScreenFlow]
+class RootScreenRoute extends PageRouteInfo<void> {
+  const RootScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          RootScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RootScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingsFlow]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
